@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'your-secret-key-keep-it-safe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']  # В продакшене замените на конкретный домен
+ALLOWED_HOSTS = ['.pythonanywhere.com']  # Разрешаем домены pythonanywhere
 
 
 # Application definition
