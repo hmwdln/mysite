@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль - Мир Путешествий{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Профиль пользователя</h1>
+    <div class="profile-info">
+        <div class="profile-item">
+            <span class="profile-label">Имя пользователя:</span>
+            <span class="profile-value">{{ user.username }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Email:</span>
+            <span class="profile-value">{{ user.email }}</span>
+        </div>
+        <div class="profile-item">
+            <span class="profile-label">Дата регистрации:</span>
+            <span class="profile-value">{{ user.date_joined|date:"d F Y" }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

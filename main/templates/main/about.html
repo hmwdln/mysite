@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}О нас - Мир Путешествий{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">О нас</h1>
+<div class="row">
+    <div class="col-md-8">
+        <p class="lead">Мы - команда профессионалов, стремящихся предоставить лучшие услуги нашим клиентам.</p>
+        <p>Наша компания была основана в 2025 году и с тех пор мы успешно реализовали множество проектов для наших клиентов.</p>
+        <p>Мы гордимся нашей работой и всегда стремимся к совершенству.</p>
+        <a href="{% url 'services' %}" class="btn btn-primary mt-3">Наши услуги</a>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Наши ценности</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Качество</li>
+                    <li class="list-group-item">Надежность</li>
+                    <li class="list-group-item">Инновации</li>
+                    <li class="list-group-item">Клиентоориентированность</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

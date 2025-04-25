@@ -1,0 +1,60 @@
+@media (max-width: 768px) {
+    .navbar-toggler {
+        display: block;
+    }
+    
+    .navbar-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .navbar-nav.show {
+        display: flex;
+    }
+    
+    .nav-item {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    
+    .navbar-container {
+        flex-wrap: wrap;
+    }
+    
+    .col-md-6, .col-md-4, .col-md-8 {
+        width: 100%;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .lead {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        width: 95%;
+        padding: 0 10px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .jumbotron {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+    }
+}

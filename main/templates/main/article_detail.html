@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        {% if article.image %}
+        <img src="{{ article.image.url }}" class="card-img-top article-image" alt="{{ article.title }}">
+        {% endif %}
+        
+        <div class="card-body">
+            <h1 class="card-title mb-4">{{ article.title }}</h1>
+            <p class="text-muted mb-3">
+                Опубликовано: {{ article.created_at|date:"d.m.Y" }}
+                {% if article.author %}
+                | Автор: {{ article.author.username }}
+                {% endif %}
+            </p>
+            
+            <div class="article-content mb-4">
+                {{ article.content|linebreaks }}
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Оставить комментарий</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.text }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if comments %}
+            <div class="comments-section">
+                <h4 class="mb-3">Комментарии</h4>
+                {% for comment in comments %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-subtitle mb-2 text-muted">{{ comment.author.username }}</h6>
+                            <small class="text-muted">{{ comment.date|date:"d.m.Y H:i" }}</small>
+                        </div>
+                        <p class="card-text">{{ comment.text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.article-image {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.comments-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #dee2e6;
+}
+</style>
+{% endblock %}

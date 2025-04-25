@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Мир Путешествий{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container mt-4">
+    <div id="mainCarousel" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'main/images/slider/slide1.jpg' %}" class="d-block w-100" alt="Путешествия">
+                <div class="carousel-caption">
+                    <h3>Откройте мир путешествий</h3>
+                    <p>Незабываемые приключения ждут вас</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'main/images/slider/slide2.jpg' %}" class="d-block w-100" alt="Природа">
+                <div class="carousel-caption">
+                    <h3>Красота природы</h3>
+                    <p>Уникальные места нашей планеты</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'main/images/slider/slide3.jpg' %}" class="d-block w-100" alt="Культура">
+                <div class="carousel-caption">
+                    <h3>Культурное наследие</h3>
+                    <p>Познакомьтесь с традициями разных стран</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки управления -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Предыдущий</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Следующий</span>
+        </button>
+    </div>
+
+    <h1 class="text-center mb-4">Добро пожаловать в Мир Путешествий</h1>
+    
+    {% if articles %}
+        <h2 class="mb-4">Последние статьи</h2>
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if article.image %}
+                            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.content|truncatewords:30 }}</p>
+                            <a href="{% url 'article_detail' article.id %}" class="btn btn-primary">Читать далее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.carousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    margin-bottom: 40px !important;
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+.carousel-item {
+    height: 500px;
+    position: relative;
+}
+
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, 
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.7) 100%);
+    z-index: 1;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: brightness(1.1);
+}
+
+.carousel-caption {
+    z-index: 2;
+    bottom: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 30px;
+}
+
+.carousel-caption h3 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    letter-spacing: 1px;
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.carousel-caption p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+    margin-bottom: 0;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 0.8;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    margin-bottom: 2rem;
+    z-index: 3;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 6px;
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+    background-color: #ffffff;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .carousel-item {
+        height: 300px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1.2rem;
+    }
+}
+</style>
+{% endblock %}
